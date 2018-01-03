@@ -41,6 +41,3 @@ class Test(Dataset):
         
         self.dataset = {'x': x, 'y': y, 'classes': classes}
 
-
-test = Test()
-test.dataset.keys()
