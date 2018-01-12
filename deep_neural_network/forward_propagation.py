@@ -18,8 +18,7 @@ class Forward_Propagation(object):
         Z -- the input of the activation function, also called pre-activation parameter
         cache -- a python dictionary containing "A", "W" and "b" ; stored for computing the backward pass efficiently
         """
-
-        Z = W.dot(A) + b
+        Z = np.dot(W, A) + b
 
         assert(Z.shape == (W.shape[0], A.shape[1]))
         cache = (A, W, b)

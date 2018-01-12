@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from deep_neural_network.activation.activation_base import ActivationBase
+import numpy as np
 
 class ReLU(ActivationBase):
-    
+
     def __init__(self):
         pass
-    
+
     def activation(self, Z):
         """
         Implement the RELU function.
@@ -16,14 +17,14 @@ class ReLU(ActivationBase):
         A -- Post-activation parameter, of the same shape as Z
         cache -- a python dictionary containing "A" ; stored for computing the backward pass efficiently
         """
-        
+
         A = np.maximum(0,Z)
-        
+
         assert(A.shape == Z.shape)
-        
-        cache = Z 
+
+        cache = Z
         return A, cache
-    
+
     def activation_backward(self, dA, cache):
         """
         Implement the backward propagation for a single RELU unit.
@@ -33,13 +34,13 @@ class ReLU(ActivationBase):
         Returns:
         dZ -- Gradient of the cost with respect to Z
         """
-        
+
         Z = cache
         dZ = np.array(dA, copy=True) # just converting dz to a correct object.
-        
-        # When z <= 0, you should set dz to 0 as well. 
+
+        # When z <= 0, you should set dz to 0 as well.
         dZ[Z <= 0] = 0
-        
+
         assert (dZ.shape == Z.shape)
-        
+
         return dZ

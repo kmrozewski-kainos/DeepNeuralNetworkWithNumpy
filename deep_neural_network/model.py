@@ -6,17 +6,17 @@ from deep_neural_network.parameters import Parameters
 from deep_neural_network.forward_propagation import Forward_Propagation
 from deep_neural_network.back_propagation import Back_Propagation
 
-class Model(object):
+class Model:
 
     def __init__(self, layer_dims, learning_rate = 0.0075, num_iterations = 3000, print_cost = False):
         # Initialize model hyperparameters
         self.layer_dims = layer_dims
         self.learning_rate = learning_rate
-        self.num_iterations = num_interations
+        self.num_iterations = num_iterations
         self.print_cost = print_cost
 
         # Initialize modules
-        self.parameters = Parameters()
+        self.parameters = Parameters(self.layer_dims)
         self.forward_propagation = Forward_Propagation()
         self.back_propagation = Back_Propagation()
 
@@ -46,7 +46,7 @@ class Model(object):
         ### END CODE HERE ###
 
         # Loop (gradient descent)
-        for i in range(0, num_iterations):
+        for i in range(0, self.num_iterations):
             # Forward propagation: [LINEAR -> RELU]*(L-1) -> LINEAR -> SIGMOID.
             AL, caches = self.forward_propagation.L_model_forward(X, model_parameters)
 
@@ -60,9 +60,9 @@ class Model(object):
             model_parameters = self.parameters.update_parameters(model_parameters, grads, self.learning_rate)
 
             # Print the cost every 100 training example
-            if print_cost and i % 100 == 0:
+            if self.print_cost and i % 100 == 0:
                 print ("Cost after iteration %i: %f" %(i, cost))
-            if print_cost and i % 100 == 0:
+            if self.print_cost and i % 100 == 0:
                 costs.append(cost)
 
         # plot the cost
@@ -72,4 +72,4 @@ class Model(object):
         plt.title("Learning rate =" + str(self.learning_rate))
         plt.show()
 
-        return parameters
+        return self.parameters
